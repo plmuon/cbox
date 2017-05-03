@@ -1,10 +1,14 @@
 ---
 - hosts: all
   tasks:
-    - name: ensure ntpd is at the latest version
-      yum: pkg=ntp state=latest
-      notify:
-      - restart ntpd
-  handlers:
-    - name: restart ntpd
-      service: name=ntpd state=restarted
+    - name: add docker-ce repo
+      yum_repository:
+        name: docker-ce
+        description: docker-ce repo
+        baseurl: https://download.docker.com/linux/centos/7/$basearch/stable
+        gpgkey: https://download.docker.com/linux/centos/gpg
+    - name: add docker-ce
+      yum: pkg=docker-ce state=latest
+    - name: enable and start docker
+      systemd: name=docker enabled=yes state=started
+  
