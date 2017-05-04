@@ -1,0 +1,5 @@
+---
+- name: add gnome
+  yum: pkg="@GNOME Desktop" state=latest
+- name: set default graphical target
+  command: systemctl set-default graphical.target

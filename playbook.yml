@@ -1,0 +1,10 @@
+---
+- hosts: all
+
+  roles:
+    - docker-ce
+    - gnome
+    - eclipse
+
+  tasks:
+    - shell: echo 'hello world'
